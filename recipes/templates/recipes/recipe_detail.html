@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>O'Neill Recipes</title>
+  </head>
+
+  <style>
+	.main {
+      margin-left: 15%;
+      margin-right: 15%;
+      margin-top: 20px
+    }
+
+  .card {
+        margin-bottom: 10px;
+    }
+
+
+  </style>
+  
+  <body>
+    
+
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/css/bootstrap-select.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/bootstrap-select.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/i18n/defaults-am_ET.js"></script>
+
+
+
+  
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="/">O'Neill Family Recipes</a>
+    <ul class="nav navbar-nav ml-auto">
+      <li class = "nav-item">
+        <a class = "nav-link" href = "{% url 'recipe_new' %}">Add a Recipe</a>
+      </li>
+    </ul>
+  </nav>
+
+
+
+  <div class = 'main'>
+  	
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 card">
+          <div class="card-body">
+            <h1>{{ recipe.title }}</h1>
+            <p class=" text-muted">{{ recipe.author }} | {{ recipe.date_added }}</p>
+            <p class="card-text ">{{ recipe.short_desc}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 card">
+          <div class="card-body">
+            <h4>Ingredients</h4>
+            <p class=" card-text">{{ recipe.ingredients | safe }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 card">
+          <div class="card-body">
+            <h4>Directions</h4>
+            <p class=" card-text">{{ recipe.directions | safe }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  
+  </body>
+
+<script>
+
+  //$(".card").click(function() {
+    //window.location = $(this).find("a").attr("href"); 
+    //return false;
+   //console.log('test')
+  //});
+
+
+
+
+</script>
+
+</html>

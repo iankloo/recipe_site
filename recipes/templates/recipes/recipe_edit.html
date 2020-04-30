@@ -1,0 +1,125 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>O'Neill Recipes</title>
+
+    {{ form.media }}
+  </head>
+
+  <style>
+	.main {
+      margin-left: 15%;
+      margin-right: 15%;
+      margin-top: 20px
+    }
+
+  .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+        margin-bottom: 10px;
+    }
+
+
+
+
+  </style>
+  
+  <body>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/css/bootstrap-select.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/bootstrap-select.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/i18n/defaults-am_ET.js"></script>
+
+
+
+<script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
+
+
+
+<script>
+      tinymce.init({
+        selector: '#id_ingredients',
+        height: "400",
+        plugins: "lists, advlist",
+        toolbar: "undo redo | styleselect | bold italic | numlist bullist | alignleft aligncenter alignright alignjustify | outdent indent",
+        setup: function (editor) {
+          editor.on('change', function (e) {
+              editor.save();
+          });
+        }
+      });
+      tinymce.init({
+        selector: '#id_directions',
+        height: "400",
+        plugins: "lists",
+        toolbar: "undo redo | styleselect | bold italic | numlist bullist | alignleft aligncenter alignright alignjustify | outdent indent",
+        setup: function (editor) {
+          editor.on('change', function (e) {
+              editor.save();
+          });
+        }
+      });
+</script>
+
+
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="/">O'Neill Family Recipes</a>
+    <ul class="nav navbar-nav ml-auto">
+      <li class = "nav-item">
+        <a class = "nav-link" href = "#">Add a Recipe</a>
+      </li>
+    </ul>
+  </nav>
+
+
+  <div class = 'main'>
+  	<h2>New Recipe</h2>
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form|crispy }}
+            <button type="submit" class="save btn btn-primary">Submit</button>
+        
+    </form>
+    
+
+  </div>
+
+
+  <br><br><br><br>
+
+  
+  </body>
+
+<script>
+
+  //$(".card").click(function() {
+    //window.location = $(this).find("a").attr("href"); 
+    //return false;
+   //console.log('test')
+  //});
+
+
+
+
+</script>
+
+</html>

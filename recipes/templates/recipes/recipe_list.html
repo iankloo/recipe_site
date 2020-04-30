@@ -1,0 +1,357 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>O'Neill Recipes</title>
+  </head>
+
+  <style>
+	.main {
+      margin-left: 15%;
+      margin-right: 15%;
+      margin-top: 20px
+    }
+
+    .card-deck .card {
+    	max-width: calc(50% - 30px);
+	}
+
+  .card{
+    cursor: pointer;
+  }
+
+  .card:hover{
+    box-shadow: 0 16px 48px #E3E7EB;
+  }
+
+  .nav-link{
+    color: #343a40 !important;;
+    cursor: pointer;
+  }
+
+ .nav-pills .nav-link.active, .nav-pills .nav-link.active:hover,.nav-pills .nav-link.active:focus{
+    background-color: #343a40 !important;
+    color:white !important;
+    font-weight:550;
+
+    }
+
+  .special_link{
+    color: white !important;
+  }
+
+  .jumbotron{
+   background-image: url('{% static "img/header_img.jpg" %}');
+   background-size: cover;
+   background-repeat: no-repeat;
+   height: 500px;
+   color: white;
+  }
+
+
+
+  </style>
+  
+  <body>
+    
+
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/css/bootstrap-select.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/bootstrap-select.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/i18n/defaults-am_ET.js"></script>
+
+
+
+  
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="/">O'Neill Family Recipes</a>
+    <ul class="nav navbar-nav ml-auto">
+      <li class = "nav-item">
+        <a class = "nav-link special_link" href = "{% url 'recipe_new' %}">Add a Recipe</a>
+      </li>
+    </ul>
+  </nav>
+
+<div class="jumbotron"></div>
+
+
+  <div class = 'main'>
+
+    
+
+<div class = 'float-left'>
+  <ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active">All</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" >Appetizer</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Breakfast</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Dinner</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Desert</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Drink</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Salad</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Bread</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Soup</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link">Grilling</a>
+    </li>
+  </ul>
+
+  <br>
+</div>
+  	
+  	<div class="card-deck">
+  	{% for rec in recs %}
+
+
+    {% if 'Breakfast' in rec.categories %}
+  	  <div class="card mb-3" style="min-width: 20rem;">
+  		  <img src = '' class="card-img-top" alt="">
+  		  <div class="card-body text-center">
+  		    <h5 class="card-title">{{ rec.title }}</h5>
+  		    <p>Added By: {{ rec.author }}</p>
+  		    <p class="card-text">{{ rec.short_desc }}</p>
+          <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+  		  </div>
+  		</div>
+    {% endif %}
+    {% endfor %}
+  	</div>
+
+  </div>
+
+  
+  </body>
+
+<script>
+
+  $(".card").click(function() {
+    window.location = $(this).find("a").attr("href"); 
+    //return false;
+    //console.log()
+  });
+
+  $(".nav-link").click(function(){
+
+    if(this.text == 'Breakfast'){
+      str = `
+      {% for rec in recs %}
+
+      {% if 'Breakfast' in rec.categories %}
+        <div class="card mb-3" style="min-width: 20rem;">
+          <img src = '' class="card-img-top" alt="">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ rec.title }}</h5>
+            <p>Added By: {{ rec.author }}</p>
+            <p class="card-text">{{ rec.short_desc }}</p>
+            <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+      `
+    } else if(this.text == 'Appetizer'){
+      str = `
+      {% for rec in recs %}
+
+      {% if 'Appetizer' in rec.categories %}
+        <div class="card mb-3" style="min-width: 20rem;">
+          <img src = '' class="card-img-top" alt="">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ rec.title }}</h5>
+            <p>Added By: {{ rec.author }}</p>
+            <p class="card-text">{{ rec.short_desc }}</p>
+            <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+      `
+    } else if(this.text == 'Dinner'){
+      str = `
+      {% for rec in recs %}
+
+      {% if 'Dinner' in rec.categories %}
+        <div class="card mb-3" style="min-width: 20rem;">
+          <img src = '' class="card-img-top" alt="">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ rec.title }}</h5>
+            <p>Added By: {{ rec.author }}</p>
+            <p class="card-text">{{ rec.short_desc }}</p>
+            <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+      `
+    }else if(this.text == 'Desert'){
+      str = `
+      {% for rec in recs %}
+
+      {% if 'Desert' in rec.categories %}
+        <div class="card mb-3" style="min-width: 20rem;">
+          <img src = '' class="card-img-top" alt="">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ rec.title }}</h5>
+            <p>Added By: {{ rec.author }}</p>
+            <p class="card-text">{{ rec.short_desc }}</p>
+            <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+      `
+    }else if(this.text == 'Drink'){
+      str = `
+      {% for rec in recs %}
+
+      {% if 'Drink' in rec.categories %}
+        <div class="card mb-3" style="min-width: 20rem;">
+          <img src = '' class="card-img-top" alt="">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ rec.title }}</h5>
+            <p>Added By: {{ rec.author }}</p>
+            <p class="card-text">{{ rec.short_desc }}</p>
+            <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+      `
+    }else if(this.text == 'Salad'){
+      str = `
+      {% for rec in recs %}
+
+      {% if 'Salad' in rec.categories %}
+        <div class="card mb-3" style="min-width: 20rem;">
+          <img src = '' class="card-img-top" alt="">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ rec.title }}</h5>
+            <p>Added By: {{ rec.author }}</p>
+            <p class="card-text">{{ rec.short_desc }}</p>
+            <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+      `
+    }else if(this.text == 'Bread'){
+      str = `
+      {% for rec in recs %}
+
+      {% if 'Bread' in rec.categories %}
+        <div class="card mb-3" style="min-width: 20rem;">
+          <img src = '' class="card-img-top" alt="">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ rec.title }}</h5>
+            <p>Added By: {{ rec.author }}</p>
+            <p class="card-text">{{ rec.short_desc }}</p>
+            <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+      `
+    }else if(this.text == 'Soup'){
+      str = `
+      {% for rec in recs %}
+
+      {% if 'Soup' in rec.categories %}
+        <div class="card mb-3" style="min-width: 20rem;">
+          <img src = '' class="card-img-top" alt="">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ rec.title }}</h5>
+            <p>Added By: {{ rec.author }}</p>
+            <p class="card-text">{{ rec.short_desc }}</p>
+            <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+      `
+    }else if(this.text == 'Grilling'){
+      str = `
+      {% for rec in recs %}
+
+      {% if 'Grilling' in rec.categories %}
+        <div class="card mb-3" style="min-width: 20rem;">
+          <img src = '' class="card-img-top" alt="">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ rec.title }}</h5>
+            <p>Added By: {{ rec.author }}</p>
+            <p class="card-text">{{ rec.short_desc }}</p>
+            <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+          </div>
+        </div>
+      {% endif %}
+      {% endfor %}
+      `
+    } else if(this.text == 'All'){
+      str = `
+      {% for rec in recs %}
+        <div class="card mb-3" style="min-width: 20rem;">
+          <img src = '' class="card-img-top" alt="">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ rec.title }}</h5>
+            <p>Added By: {{ rec.author }}</p>
+            <p class="card-text">{{ rec.short_desc }}</p>
+            <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
+          </div>
+        </div>
+      {% endfor %}
+      `
+    }
+    
+
+    $(".card-deck").html(str)
+
+    $(".nav-link").removeClass('active')
+    $(this).addClass('active')
+
+    console.log(this)
+  })
+
+
+
+
+
+
+</script>
+
+</html>
