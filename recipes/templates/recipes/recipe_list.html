@@ -62,13 +62,19 @@
    background-repeat: no-repeat;
    color: white;
    min-height: 120px;
-  }}
+  }
 
     .main {
       margin-left: 10%;
       margin-right: 10%;
       margin-top: 20px
     }
+
+    .card{
+      min-width:100% !important;
+    }
+
+  }
 
 
   </style>
@@ -158,9 +164,6 @@
   	
   	<div class="card-deck">
   	{% for rec in recs %}
-
-
-    {% if 'Breakfast' in rec.categories %}
   	  <div class="card mb-3" style="min-width: 20rem;">
   		  <img src = '' class="card-img-top" alt="">
   		  <div class="card-body text-center">
@@ -170,7 +173,6 @@
           <a href="{% url 'recipe_detail' pk=rec.pk %}" class=""></a>
   		  </div>
   		</div>
-    {% endif %}
     {% endfor %}
   	</div>
 
@@ -357,6 +359,7 @@
       {% endfor %}
       `
     }
+
     
 
     $(".card-deck").html(str)
@@ -364,7 +367,12 @@
     $(".nav-link").removeClass('active')
     $(this).addClass('active')
 
-    console.log(this)
+    $(".card").click(function() {
+      window.location = $(this).find("a").attr("href"); 
+      //return false;
+      //console.log()
+    });
+
   })
 
 
