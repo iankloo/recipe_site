@@ -5,9 +5,8 @@ from django.utils import timezone
 
 
 def recipe_list(request):
-	recs = Recipe.objects.all()
-	
-	return render(request, 'recipes/recipe_list.html', {'recs': recs})
+    recipes = Recipe.objects.all().order_by('-created_at')  # or however you want to order them
+    return render(request, 'recipes/recipe_list.html', {'recipes': recipes})
 
 
 def recipe_detail(request, pk):
